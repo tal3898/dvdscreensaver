@@ -3,36 +3,49 @@ package com.taban.dvdscreensaver
 import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.Canvas
-import android.graphics.Paint
-import java.util.*
 
-class DvdObject(resources: Resources) {
+class DvdObject(_resources: Resources, _screenWidth: Int, _screenHeight: Int) {
 
     val originalImage : Bitmap
     val resizedImage : Bitmap
+
     var posx : Float = 0f
     var posy : Float = 0f
     var dirx : Int = 1
     var diry : Int = 1
     val speed : Int = 5
+    val imgWidth : Int
+    val imgHeight : Int
+    val screenWidth : Int
+    val screenHeight : Int
+
+
+    init {
+        originalImage = BitmapFactory.decodeResource(_resources, R.drawable.dvd_black)
+        imgWidth = 500
+        imgHeight = 350
+        resizedImage = resizeBitmap(originalImage, imgWidth, imgHeight)
+        screenHeight = _screenHeight
+        screenWidth = _screenWidth
+
+    }
+
 
     public fun moveForward() {
+        if (posx.toInt() + this.imgWidth > screenWidth ||
+                posx < 0) {
+            dirx *= -1
+        }
+        if (posy.toInt() + this.imgHeight > screenHeight ||
+                posy < 0) {
+            diry *= -1
+        }
         posx += speed * dirx
         posy += speed * diry
     }
 
     public fun getImage() : Bitmap {
         return resizedImage
-    }
-
-
-
-
-    init {
-        originalImage = BitmapFactory.decodeResource(resources, R.drawable.dvd_black)
-        resizedImage = resizeBitmap(originalImage, 500, 350)
-
     }
 
     private fun resizeBitmap(bitmap:Bitmap, width:Int, height:Int):Bitmap{

@@ -3,6 +3,9 @@ package com.taban.dvdscreensaver
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MotionEvent
+import android.util.DisplayMetrics
+
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -10,9 +13,13 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        gameView = GameView(this)
-        setContentView(gameView)
 
+        val displayMetrics = DisplayMetrics()
+        windowManager.defaultDisplay.getMetrics(displayMetrics)
+        val height = displayMetrics.heightPixels
+        val width = displayMetrics.widthPixels
+        gameView = GameView(this, height, width)
+        setContentView(gameView)
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {

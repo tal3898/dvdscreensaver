@@ -1,19 +1,13 @@
 package com.taban.dvdscreensaver
 
 import android.content.Context
-import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
-import android.view.View
-import android.graphics.BitmapFactory
-import android.graphics.Bitmap
-import android.view.MotionEvent
-import java.util.*
 import android.view.SurfaceHolder
 import android.view.SurfaceView
 
 
-class GameView(context : Context) : SurfaceView(context) , Runnable{
+class GameView(_context: Context, _screenHeight: Int, _screenWidth: Int) : SurfaceView(_context) , Runnable{
 
 
     val paint :Paint
@@ -22,12 +16,13 @@ class GameView(context : Context) : SurfaceView(context) , Runnable{
     var isMoving : Boolean = true
     var gameThread : Thread
 
+
     init {
         paint = Paint()
         paint.isFilterBitmap = true
         paint.isAntiAlias = true
         paint.color = Color.YELLOW
-        dvd = DvdObject(resources);
+        dvd = DvdObject(resources, _screenWidth, _screenHeight)
         ourHolder = holder
         gameThread = Thread(this)
     }
