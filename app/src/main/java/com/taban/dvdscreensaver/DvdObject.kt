@@ -3,12 +3,13 @@ package com.taban.dvdscreensaver
 import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import java.util.*
 
 class DvdObject(_resources: Resources, _screenWidth: Int, _screenHeight: Int) {
 
-    val originalImage : Bitmap
-    val resizedImage : Bitmap
-
+    //val originalImage : Bitmap
+    //val resizedImage : Bitmap
+    var currColor : Color = Color.BLUE
     var posx : Float = 0f
     var posy : Float = 0f
     var dirx : Int = 1
@@ -18,35 +19,49 @@ class DvdObject(_resources: Resources, _screenWidth: Int, _screenHeight: Int) {
     val imgHeight : Int
     val screenWidth : Int
     val screenHeight : Int
+    val colorsMap : DvdImagesMap
 
 
     init {
-        originalImage = BitmapFactory.decodeResource(_resources, R.drawable.dvd_black)
+        //originalImage = BitmapFactory.decodeResource(_resources, R.drawable.dvd_black)
         imgWidth = 500
         imgHeight = 350
-        resizedImage = resizeBitmap(originalImage, imgWidth, imgHeight)
+        //resizedImage = resizeBitmap(originalImage, imgWidth, imgHeight)
         screenHeight = _screenHeight
         screenWidth = _screenWidth
-
+        colorsMap = DvdImagesMap(_resources)
     }
 
 
-    public fun moveForward() {
+    fun moveForward() {
         if (posx.toInt() + this.imgWidth > screenWidth ||
                 posx < 0) {
             dirx *= -1
+            changeDvdColor()
         }
         if (posy.toInt() + this.imgHeight > screenHeight ||
                 posy < 0) {
             diry *= -1
+            changeDvdColor()
         }
         posx += speed * dirx
         posy += speed * diry
     }
 
-    public fun getImage() : Bitmap {
-        return resizedImage
+    fun getImage() : Bitmap {
+        return colorsMap.getColorImage(currColor)
     }
+
+    fun changeDvdColor() {
+        val colorsAsList = Color.values()
+        var randomColorIndex = Random().nextInt(colorsAsList.size)
+        if (colorsAsList.get(randomColorIndex).equals(currColor)) {
+            randomColorIndex = (randomColorIndex + 1) % colorsAsList.size
+        }
+
+        currColor = colorsAsList.get(randomColorIndex)
+    }
+
 
     private fun resizeBitmap(bitmap:Bitmap, width:Int, height:Int):Bitmap{
         /*
