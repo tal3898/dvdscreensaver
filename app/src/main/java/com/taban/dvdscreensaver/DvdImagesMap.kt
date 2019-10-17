@@ -20,6 +20,8 @@ class DvdImagesMap(_resources : Resources) {
                 resizeBitmap(BitmapFactory.decodeResource(_resources, R.drawable.dvd_blue), imgWidth, imgHeight))
         colorsMap.put(Color.GREEN,
                 resizeBitmap(BitmapFactory.decodeResource(_resources, R.drawable.dvd_green), imgWidth, imgHeight))
+        colorsMap.put(Color.ORANGE,
+                resizeBitmap(BitmapFactory.decodeResource(_resources, R.drawable.dvd_orange), imgWidth, imgHeight))
         colorsMap.put(Color.PINK,
                 resizeBitmap(BitmapFactory.decodeResource(_resources, R.drawable.dvd_pink), imgWidth, imgHeight))
         colorsMap.put(Color.PURPLE,
