@@ -7,14 +7,14 @@ import android.view.SurfaceHolder
 import android.view.SurfaceView
 
 
-class GameView(_context: Context, _screenHeight: Int, _screenWidth: Int) : SurfaceView(_context) , Runnable{
+class GameView(_context: Context, _screenHeight: Int, _screenWidth: Int) : SurfaceView(_context), Runnable {
 
 
-    val paint :Paint
-    val dvd : DvdObject
+    val paint: Paint
+    val dvd: DvdObject
     val ourHolder: SurfaceHolder
-    var isMoving : Boolean = true
-    var gameThread : Thread
+    var isMoving: Boolean = true
+    var gameThread: Thread
 
 
     init {
@@ -35,7 +35,7 @@ class GameView(_context: Context, _screenHeight: Int, _screenWidth: Int) : Surfa
     public fun pause() {
         try {
             gameThread.join()
-        } catch (e : Exception) {
+        } catch (e: Exception) {
             println("error in joining the thread")
         }
     }
@@ -43,15 +43,17 @@ class GameView(_context: Context, _screenHeight: Int, _screenWidth: Int) : Surfa
     override fun run() {
         while (true) {
             if (ourHolder.surface.isValid && isMoving) {
-                var canvas = ourHolder.lockCanvas()
-                dvd.moveForward()
-                canvas.drawColor(Color.YELLOW)
-                canvas.drawBitmap(dvd.getImage(), dvd.posx, dvd.posy, paint)
-                ourHolder.unlockCanvasAndPost(canvas)
-            } else {
-                println("tal in else")
+                draw()
             }
         }
+    }
+
+    fun draw() {
+        var canvas = ourHolder.lockCanvas()
+        dvd.moveForward()
+        canvas.drawColor(Color.BLACK)
+        canvas.drawBitmap(dvd.getImage(), dvd.posx, dvd.posy, paint)
+        ourHolder.unlockCanvasAndPost(canvas)
     }
 
 }
