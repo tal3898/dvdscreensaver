@@ -42,15 +42,12 @@ class GameView(_context: Context, _screenHeight: Int, _screenWidth: Int) : Surfa
     }
 
     fun resume() {
-        Log.i(MainActivity.LOG_TAG, "resuming the dvd")
         isMoving = true
         gameThread = Thread(this)
         gameThread.start()
-        Log.i(MainActivity.LOG_TAG, "resumed successfully")
     }
 
     fun pause() {
-        Log.i(MainActivity.LOG_TAG, "pausing the dvd")
         try {
             isMoving = false
             gameThread.join()

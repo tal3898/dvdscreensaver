@@ -38,11 +38,16 @@ class MainActivity : Activity() {
 
     override fun onResume() {
         super.onResume()
+        Log.i(MainActivity.LOG_TAG, "resuming the dvd")
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         gameView.resume()
+        Log.i(MainActivity.LOG_TAG, "resumed successfully")
     }
 
     override fun onPause() {
         super.onPause()
+        Log.i(MainActivity.LOG_TAG, "pausing the dvd")
+        window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         gameView.pause()
     }
 
