@@ -3,9 +3,16 @@ package com.taban.dvdscreensaver
 import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.util.Size
 import java.util.*
 
 class DvdObject(_resources: Resources, _screenWidth: Int, _screenHeight: Int) {
+
+    companion object {
+        var DVD_WIDTH : Int = 0
+        var DVD_HEIGHT : Int = 0
+        lateinit var DVD_SIZE : Size
+    }
 
     var currColor : Color = Color.BLUE
     var posx : Float = 0f
@@ -13,16 +20,12 @@ class DvdObject(_resources: Resources, _screenWidth: Int, _screenHeight: Int) {
     var dirx : Int = 1
     var diry : Int = 1
     val speed : Int = 5
-    val imgWidth : Int
-    val imgHeight : Int
     val screenWidth : Int
     val screenHeight : Int
     val colorsMap : DvdImagesMap
 
 
     init {
-        imgWidth = 500
-        imgHeight = 350
         screenHeight = _screenHeight
         screenWidth = _screenWidth
         colorsMap = DvdImagesMap(_resources)
@@ -32,12 +35,12 @@ class DvdObject(_resources: Resources, _screenWidth: Int, _screenHeight: Int) {
      * the method move the dvd object forward. If it touches the wall, change the directions
      */
     fun moveForward() {
-        if (posx.toInt() + this.imgWidth > screenWidth ||
+        if (posx.toInt() + DVD_WIDTH > screenWidth ||
                 posx < 0) {
             dirx *= -1
             changeDvdColor()
         }
-        if (posy.toInt() + this.imgHeight > screenHeight ||
+        if (posy.toInt() + DVD_HEIGHT > screenHeight ||
                 posy < 0) {
             diry *= -1
             changeDvdColor()

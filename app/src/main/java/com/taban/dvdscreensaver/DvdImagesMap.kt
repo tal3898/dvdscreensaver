@@ -6,30 +6,26 @@ import android.graphics.BitmapFactory
 
 class DvdImagesMap(_resources : Resources) {
     var colorsMap : HashMap<Color, Bitmap>
-    val imgWidth : Int
-    val imgHeight : Int
 
     init  {
         colorsMap = HashMap()
-        imgWidth = 500
-        imgHeight = 350
-
+        
         colorsMap.put(Color.AZURE,
-                resizeBitmap(BitmapFactory.decodeResource(_resources, R.drawable.dvd_azure), imgWidth, imgHeight))
+                resizeBitmap(BitmapFactory.decodeResource(_resources, R.drawable.dvd_azure), DvdObject.DVD_WIDTH, DvdObject.DVD_HEIGHT))
         colorsMap.put(Color.BLUE,
-                resizeBitmap(BitmapFactory.decodeResource(_resources, R.drawable.dvd_blue), imgWidth, imgHeight))
+                resizeBitmap(BitmapFactory.decodeResource(_resources, R.drawable.dvd_blue), DvdObject.DVD_WIDTH, DvdObject.DVD_HEIGHT))
         colorsMap.put(Color.GREEN,
-                resizeBitmap(BitmapFactory.decodeResource(_resources, R.drawable.dvd_green), imgWidth, imgHeight))
+                resizeBitmap(BitmapFactory.decodeResource(_resources, R.drawable.dvd_green), DvdObject.DVD_WIDTH, DvdObject.DVD_HEIGHT))
         colorsMap.put(Color.ORANGE,
-                resizeBitmap(BitmapFactory.decodeResource(_resources, R.drawable.dvd_orange), imgWidth, imgHeight))
+                resizeBitmap(BitmapFactory.decodeResource(_resources, R.drawable.dvd_orange), DvdObject.DVD_WIDTH, DvdObject.DVD_HEIGHT))
         colorsMap.put(Color.PINK,
-                resizeBitmap(BitmapFactory.decodeResource(_resources, R.drawable.dvd_pink), imgWidth, imgHeight))
+                resizeBitmap(BitmapFactory.decodeResource(_resources, R.drawable.dvd_pink), DvdObject.DVD_WIDTH, DvdObject.DVD_HEIGHT))
         colorsMap.put(Color.PURPLE,
-                resizeBitmap(BitmapFactory.decodeResource(_resources, R.drawable.dvd_purple), imgWidth, imgHeight))
+                resizeBitmap(BitmapFactory.decodeResource(_resources, R.drawable.dvd_purple), DvdObject.DVD_WIDTH, DvdObject.DVD_HEIGHT))
         colorsMap.put(Color.RED,
-                resizeBitmap(BitmapFactory.decodeResource(_resources, R.drawable.dvd_red), imgWidth, imgHeight))
+                resizeBitmap(BitmapFactory.decodeResource(_resources, R.drawable.dvd_red), DvdObject.DVD_WIDTH, DvdObject.DVD_HEIGHT))
         colorsMap.put(Color.YELLOW,
-                resizeBitmap(BitmapFactory.decodeResource(_resources, R.drawable.dvd_yellow), imgWidth, imgHeight))
+                resizeBitmap(BitmapFactory.decodeResource(_resources, R.drawable.dvd_yellow), DvdObject.DVD_WIDTH, DvdObject.DVD_HEIGHT))
 
 
     }
