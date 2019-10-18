@@ -9,9 +9,11 @@ import android.view.View
 import android.view.Window
 import android.view.WindowManager
 
-
 class MainActivity : Activity() {
 
+    companion object {
+        val LOG_TAG = "TABAN.DVDSCREENSAVER"
+    }
     lateinit var gameView : GameView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,11 +30,6 @@ class MainActivity : Activity() {
         val width = displayMetrics.widthPixels
         gameView = GameView(this, height, width)
         setContentView(gameView)
-    }
-
-    override fun onTouchEvent(event: MotionEvent?): Boolean {
-        gameView.isMoving = !gameView.isMoving
-        return super.onTouchEvent(event)
     }
 
     override fun onResume() {
