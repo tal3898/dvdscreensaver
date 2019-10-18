@@ -14,6 +14,7 @@ class GameView(_context: Context, _screenHeight: Int, _screenWidth: Int) : Surfa
     val dvd : DvdObject
     val ourHolder: SurfaceHolder
     var gameThread : Thread
+    var isMoving : Boolean
 
     init {
         paint = Paint()
@@ -23,30 +24,37 @@ class GameView(_context: Context, _screenHeight: Int, _screenWidth: Int) : Surfa
         dvd = DvdObject(resources, _screenWidth, _screenHeight)
         ourHolder = holder
         gameThread = Thread(this)
+        isMoving = true
     }
 
     override fun run() {
-        while (true) {
+        while (isMoving) {
             if (ourHolder.surface.isValid) {
                 var canvas = ourHolder.lockCanvas()
                 dvd.moveForward()
                 canvas.drawColor(Color.BLACK)
                 canvas.drawBitmap(dvd.getImage(), dvd.posx, dvd.posy, paint)
                 ourHolder.unlockCanvasAndPost(canvas)
+            } else {
+                Log.w(MainActivity.LOG_TAG, "The holder surface is not valid")
             }
         }
     }
 
     fun resume() {
         Log.i(MainActivity.LOG_TAG, "resuming the dvd")
+        isMoving = true
         gameThread = Thread(this)
         gameThread.start()
+        Log.i(MainActivity.LOG_TAG, "resumed successfully")
     }
 
     fun pause() {
         Log.i(MainActivity.LOG_TAG, "pausing the dvd")
         try {
+            isMoving = false
             gameThread.join()
+            Log.i(MainActivity.LOG_TAG, "paused successfully")
         } catch (e : Exception) {
             Log.e(MainActivity.LOG_TAG, "Could not stop the thread")
         }

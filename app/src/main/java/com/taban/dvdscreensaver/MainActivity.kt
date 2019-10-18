@@ -12,8 +12,9 @@ import android.view.WindowManager
 class MainActivity : Activity() {
 
     companion object {
-        val LOG_TAG = "TABAN.DVDSCREENSAVER"
+        val LOG_TAG = "dvd_log"
     }
+
     lateinit var gameView : GameView
 
     override fun onCreate(savedInstanceState: Bundle?) {
