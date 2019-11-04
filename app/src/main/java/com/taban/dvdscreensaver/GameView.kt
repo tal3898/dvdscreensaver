@@ -31,10 +31,12 @@ class GameView(_context: Context, _screenHeight: Int, _screenWidth: Int) : Surfa
         while (isMoving) {
             if (ourHolder.surface.isValid) {
                 var canvas = ourHolder.lockCanvas()
-                dvd.moveForward()
-                canvas.drawColor(Color.BLACK)
-                canvas.drawBitmap(dvd.getImage(), dvd.posx, dvd.posy, paint)
-                ourHolder.unlockCanvasAndPost(canvas)
+                if (canvas != null) {
+                    dvd.moveForward()
+                    canvas.drawColor(Color.BLACK)
+                    canvas.drawBitmap(dvd.getImage(), dvd.posx, dvd.posy, paint)
+                    ourHolder.unlockCanvasAndPost(canvas)
+                }
             } else {
                 Log.w(MainActivity.LOG_TAG, "The holder surface is not valid")
             }
